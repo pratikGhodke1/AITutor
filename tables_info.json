@@ -1,0 +1,30 @@
+[
+  {
+    "table_index": 1,
+    "csv_file": "tables/table_1.csv"
+  },
+  {
+    "table_index": 2,
+    "csv_file": "tables/table_2.csv"
+  },
+  {
+    "table_index": 3,
+    "csv_file": "tables/table_3.csv"
+  },
+  {
+    "table_index": 4,
+    "csv_file": "tables/table_4.csv"
+  },
+  {
+    "table_index": 5,
+    "csv_file": "tables/table_5.csv"
+  },
+  {
+    "table_index": 6,
+    "csv_file": "tables/table_6.csv"
+  },
+  {
+    "table_index": 7,
+    "csv_file": "tables/table_7.csv"
+  }
+]

@@ -1,0 +1,14 @@
+.venv
+.vscode
+__pycache__
+
+data/
+debug/
+images/
+tables/
+utils/
+static/
+
+.env
+*.ipynb
+db
