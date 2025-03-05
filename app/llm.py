@@ -43,7 +43,7 @@ agent = Agent(
     knowledge=knowledge_base,
     search_knowledge=True,
     storage=SqliteAgentStorage(db_file="./data/db.sqlite", table_name="agent-baba"),
-    debug_mode=True,
+    # debug_mode=True,
     user_id="common user",
 )
 
@@ -51,3 +51,11 @@ agent = Agent(
 def get_ai_response(prompt, session_id="common session"):
     agent.session_id = session_id
     return agent.run(prompt).content
+
+
+def get_ai_response_stream(prompt, session_id="common session"):
+    agent.session_id = session_id
+    # run_response = agent.run(prompt, stream=True)
+    # for chunk in run_response:
+    #     yield chunk.content
+    return agent.run(prompt, stream=True)

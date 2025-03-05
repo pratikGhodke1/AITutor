@@ -2,9 +2,10 @@ import os
 import torch
 
 from uuid import uuid4
-torch.classes.__path__ = [os.path.join(torch.__path__[0], torch.classes.__file__)] 
 
-from app.llm import get_ai_response
+torch.classes.__path__ = [os.path.join(torch.__path__[0], torch.classes.__file__)]
+
+from app.llm import get_ai_response, get_ai_response_stream
 
 import streamlit as st
 
@@ -28,10 +29,15 @@ if prompt := st.chat_input("What you want to learn today?"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    with st.spinner("🤔 Thinking..."):
-        response = get_ai_response(prompt, SESSION_ID)
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        st.markdown(response)
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+        resp_container = st.empty()
+        response_text = ""
+        response = get_ai_response_stream(prompt, SESSION_ID)
+        with st.spinner("🤔 Thinking..."):
+            for i in response:
+                response_text += i.content
+                resp_container.markdown(response_text)
+
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": response_text})
