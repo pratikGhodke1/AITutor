@@ -7,6 +7,7 @@ from agno.document.base import Document
 from agno.document.chunking.document import DocumentChunking
 from agno.knowledge.text import TextKnowledgeBase, TextReader
 from agno.vectordb.milvus.milvus import Milvus
+from agno.embedder.sentence_transformer import SentenceTransformerEmbedder
 
 from app.process import ExtractedPDF, process_data
 from uuid import uuid4
@@ -15,14 +16,16 @@ MILVUS_URI = os.environ["MILVUS_URI"]
 MILVUS_TOKEN = os.environ["MILVUS_TOKEN"]
 
 
-
 knowledge_base = TextKnowledgeBase(
     path="data/pdfs",
     # Table name: ai.pdf_documents
     vector_db=Milvus(
         collection="pdf_documents_maths",
         uri=MILVUS_URI,
-        token=MILVUS_TOKEN
+        token=MILVUS_TOKEN,
+        embedder=SentenceTransformerEmbedder(
+            id="sentence-transformers/all-mpnet-base-v2", dimensions=768
+        ),
         # db_url="postgresql+psycopg://ai:ai@localhost:5532/ai",
     ),
     reader=TextReader(chunk=True, chunking_strategy=DocumentChunking()),
