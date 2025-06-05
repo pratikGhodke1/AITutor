@@ -43,7 +43,7 @@ agent = Agent(
     knowledge=knowledge_base,
     search_knowledge=True,
     storage=SqliteAgentStorage(db_file="./data/db.sqlite", table_name="agent-baba"),
-    # debug_mode=True,
+    debug_mode=True,
     user_id="common user",
 )
 
